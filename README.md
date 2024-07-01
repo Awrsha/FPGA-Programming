@@ -32,8 +32,8 @@ This repository is licensed under the Apache License 2.0. See the [LICENSE](LICE
 ### Installation
 1. Clone the repository:
     ```bash
-    git clone https://github.com/Awrsha/FGPA-Programming.git
-    cd FGPA-Programming
+    git clone https://github.com/Awrsha/FPGA-Programming.git
+    cd FPGA-Programming
     ```
 
 2. Follow the instructions in each project directory for specific setup and implementation details.
