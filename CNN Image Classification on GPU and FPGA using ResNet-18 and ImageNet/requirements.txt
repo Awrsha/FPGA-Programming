@@ -1,0 +1,8 @@
+torch
+torchvision
+onnx
+onnx-tf
+tensorflow
+numpy
+opencv-python
+pynq
