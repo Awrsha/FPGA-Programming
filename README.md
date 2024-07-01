@@ -1,4 +1,4 @@
-# FGPA-Programming
+# FPGA-Programming
 
 This repository contains a collection of projects focused on implementing various deep learning models and algorithms on FPGA. These projects leverage the power of FPGA for efficient and high-performance execution of machine learning tasks. Below is a brief overview of each project included in this repository.
 
