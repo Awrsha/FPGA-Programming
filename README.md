@@ -33,59 +33,6 @@
 
 Advanced FPGA implementations of cutting-edge deep learning models, optimized for high performance and energy efficiency.
 
-## 💡 Projects
-
-<details>
-<summary><h3>🎨 CIFAR-10 Pattern Recognition</h3></summary>
-
-- **Architecture**: Custom CNN
-- **Dataset**: CIFAR-10
-- **Performance**:
-  - Accuracy: 94.5%
-  - Throughput: 120 FPS
-  - Power: 4.2W
-</details>
-
-<details>
-<summary><h3>🖼️ ResNet-18 on GPU/FPGA</h3></summary>
-
-<div align="center">
-  <table>
-    <tr>
-      <th>Metric</th>
-      <th>GPU</th>
-      <th>FPGA</th>
-    </tr>
-    <tr>
-      <td>Latency</td>
-      <td>15ms</td>
-      <td>8ms</td>
-    </tr>
-    <tr>
-      <td>Power</td>
-      <td>250W</td>
-      <td>12W</td>
-    </tr>
-  </table>
-</div>
-</details>
-
-<details>
-<summary><h3>🔄 Systolic Array Neural Network</h3></summary>
-
-```
-┌─────────┐     ┌─────────┐     ┌─────────┐
-│ PE(0,0) │ ──► │ PE(0,1) │ ──► │ PE(0,2) │
-    ▲            ▲            ▲
-    │            │            │
-│ PE(1,0) │ ──► │ PE(1,1) │ ──► │ PE(1,2) │
-    ▲            ▲            ▲
-    │            │            │
-│ PE(2,0) │ ──► │ PE(2,1) │ ──► │ PE(2,2) │
-└─────────┘     └─────────┘     └─────────┘
-```
-</details>
-
 ## 🏗️ Architecture
 
 ### System Overview
