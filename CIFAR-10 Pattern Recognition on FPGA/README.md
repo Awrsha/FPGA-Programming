@@ -1,93 +1,110 @@
 # CIFAR-10 Pattern Recognition on FPGA
 
-This project demonstrates how to implement a deep learning algorithm on FPGA for pattern recognition using the CIFAR-10 dataset. The CIFAR-10 dataset consists of 32x32 color images in 10 different classes, making it suitable for pattern recognition tasks. We use PyTorch for training the model and the PYNQ platform to run the model on FPGA. PYNQ is an open-source framework that allows Python code to run directly on FPGA.
+This project implements deep learning-based pattern recognition on FPGA using the CIFAR-10 dataset, PyTorch, and PYNQ framework.
+
+## Architecture Overview
+
+```mermaid
+graph TD
+    A[CIFAR-10 Dataset] --> B[PyTorch Training]
+    B --> C[Model Export]
+    C -->|ONNX| D[FPGA Deployment]
+    C -->|TensorFlow| D
+    D --> E[Video Processing]
+    E --> F[Real-time Inference]
+```
+
+## Dataset Information
+
+| Class | Examples | Training Images | Test Images |
+|-------|----------|----------------|-------------|
+| Airplane | ✈️ | 5,000 | 1,000 |
+| Automobile | 🚗 | 5,000 | 1,000 |
+| Bird | 🐦 | 5,000 | 1,000 |
+| Cat | 🐱 | 5,000 | 1,000 |
+| Deer | 🦌 | 5,000 | 1,000 |
+| Dog | 🐕 | 5,000 | 1,000 |
+| Frog | 🐸 | 5,000 | 1,000 |
+| Horse | 🐎 | 5,000 | 1,000 |
+| Ship | 🚢 | 5,000 | 1,000 |
+| Truck | 🚛 | 5,000 | 1,000 |
+
+## Implementation Pipeline
+
+```mermaid
+sequenceDiagram
+    participant Dataset
+    participant Training
+    participant Export
+    participant FPGA
+    participant Display
+
+    Dataset->>Training: Load CIFAR-10
+    Training->>Training: Train CNN
+    Training->>Export: Save Model
+    Export->>Export: Quantization
+    Export->>FPGA: Deploy
+    FPGA->>FPGA: Load Bitstream
+    FPGA->>Display: Process Frames
+    Display->>Display: Show Results
+```
 
 ## Project Structure
 
-1. **Training the Model in PyTorch** (`train_model.py`):
-    - Load and preprocess the CIFAR-10 dataset.
-    - Define and train a Convolutional Neural Network (CNN).
-    - Quantize the trained model.
-    - Export the model to ONNX and TensorFlow formats.
+```
+cifar10-fpga/
+├── src/
+│   ├── training/
+│   │   ├── train_model.py
+│   │   ├── data_loader.py
+│   │   └── model.py
+│   ├── deployment/
+│   │   ├── deploy_model_fpga.py
+│   │   └── utils.py
+│   └── notebooks/
+│       └── demo.ipynb
+├── models/
+│   ├── trained/
+│   └── quantized/
+├── bitstreams/
+│   └── cifar10_cnn.bit
+└── docs/
+    └── images/
+```
 
-2. **Deploying the Model on FPGA** (`deploy_model_fpga.py`):
-    - Load the bitstream for the FPGA.
-    - Preprocess input images and make predictions using the FPGA.
-    - Set up a video stream, process each frame, and display the prediction results.
+## Setup Instructions
 
-## Prerequisites
+### 1. Environment Setup
 
-- Python 3.x
-- PyTorch
-- torchvision
-- PYNQ
-- OpenCV
-- ONNX
-- ONNX-TensorFlow
+```bash
+# Create virtual environment
+python -m venv venv
+source venv/bin/activate  # Linux/Mac
+venv\Scripts\activate     # Windows
 
-## Getting Started
+# Install dependencies
+pip install -r requirements.txt
+```
 
-### Training the Model
+### 2. Model Training
 
-1. **Install Dependencies**:
-    ```sh
-    pip install torch torchvision onnx onnx-tf
-    ```
-
-2. **Run the Training Script**:
-    ```sh
-    python train_model.py
-    ```
-    This script will:
-    - Load the CIFAR-10 dataset.
-    - Define and train the CNN.
-    - Quantize the trained model.
-    - Export the model to ONNX and TensorFlow formats.
-
-3. **Generated Files**:
-    - `cifar10_cnn.pth`: Trained PyTorch model.
-    - `cifar10_cnn_quantized.pth`: Quantized PyTorch model.
-    - `cifar10_cnn.onnx`: ONNX model.
-    - `cifar10_cnn_tf`: TensorFlow model directory.
-
-### Deploying the Model on FPGA
-
-1. **Prepare the FPGA Bitstream**:
-    - Generate the bitstream file (`cifar10_cnn.bit`) using Vivado HLS or similar tools.
-    - Ensure the bitstream file is compatible with your PYNQ-compatible board (e.g., Xilinx PYNQ-Z1 or PYNQ-Z2).
-
-2. **Install PYNQ and OpenCV**:
-    ```sh
-    pip install pynq opencv-python
-    ```
-
-3. **Run the Deployment Script**:
-    ```sh
-    python deploy_model_fpga.py
-    ```
-    This script will:
-    - Load the bitstream for the FPGA.
-    - Set up a video stream.
-    - Preprocess each frame and make predictions using the FPGA.
-    - Display the prediction results on each frame.
-
-## File Structure
-
-- `train_model.py`: Script for training and exporting the CNN model.
-- `deploy_model_fpga.py`: Script for deploying the trained model on FPGA and processing video frames.
-- `README.md`: Project documentation.
-
-## Notes
-
-- The FPGA deployment requires additional optimizations and adjustments for efficient performance.
-- Ensure your PYNQ-compatible board and FPGA bitstream are correctly set up before running the deployment script.
+```python
+# Example training configuration
+training_config = {
+    'batch_size': 128,
+    'epochs': 100,
+    'learning_rate': 0.001,
+    'momentum': 0.9
+}
+```
 
 ## License
 
-This project is licensed under the MIT License. See the LICENSE file for details.
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
 
 ## Acknowledgements
 
-- CIFAR-10 dataset: [CIFAR-10](https://www.cs.toronto.edu/~kriz/cifar.html)
-- PyTorch: [PyTorch](https://pytorch.org/)
-- PYNQ: [PYNQ](http://www.pynq.io/)
+- CIFAR-10 dataset creators
+- PyTorch development team
+- PYNQ community
+- AMD/Xilinx
